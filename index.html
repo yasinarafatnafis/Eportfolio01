@@ -183,15 +183,26 @@
 
         <!-- Right Content - LARGER Portrait -->
         <div class="flex justify-center lg:justify-end">
-          <div class="portrait-container">
+          <div class="portrait-container" style="display:flex; align-items:center;">
             <img
               id="hero-portrait"
-              src="resources/portrait.png"
+              src="resources/me.jpg"
               alt="Portrait of Yasin Arafat Nafis"
               class="portrait-image-hero"
               onload="console.log('Hero portrait loaded:', this.src)"
               onerror="console.warn('Hero portrait missing:', this.src); this.onerror=null; this.src='https://via.placeholder.com/320?text=Portrait+Missing';"
             />
+            <!-- optional second hero image (uncomment if you add resources/me2.jpg) -->
+            <!--
+            <img
+              id="hero-portrait-2"
+              src="resources/me2.jpg"
+              alt="Alternate portrait"
+              class="portrait-image-hero-secondary"
+              onload="console.log('Hero second portrait loaded:', this.src)"
+              onerror="console.warn('Hero second portrait missing:', this.src); this.onerror=null; this.src='https://via.placeholder.com/220?text=Portrait+2+Missing';"
+            />
+            -->
           </div>
         </div>
       </div>
@@ -236,15 +247,25 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
           <!-- LARGER About portrait -->
           <div class="lg:col-span-1 flex justify-center">
-            <div class="relative">
+            <div class="relative" style="display:flex; align-items:center; justify-content:center;">
               <img
                 id="about-portrait"
-                src="resources/portrait.png"
+                src="resources/me.jpg"
                 alt="Yasin Arafat Nafis"
                 class="portrait-image-about"
                 onload="console.log('About portrait loaded:', this.src)"
                 onerror="console.warn('About portrait missing:', this.src); this.onerror=null; this.src='https://via.placeholder.com/384?text=Portrait+Missing';"
               />
+              <!-- optional second about image (uncomment if you add resources/me2.jpg) -->
+              <!--
+              <img
+                id="about-portrait-2"
+                src="resources/me2.jpg"
+                alt="Alternate about portrait"
+                style="width:220px;height:220px;margin-left:18px;border-radius:1rem;border:6px solid #fff;box-shadow:0 18px 36px rgba(2,6,23,0.10);"
+                onerror="this.onerror=null; this.src='https://via.placeholder.com/220?text=Portrait+2+Missing';"
+              />
+              -->
             </div>
           </div>
 
@@ -363,7 +384,7 @@
         const t = document.getElementById('typed-text'); if (t) t.textContent = 'Entry-level Software Developer';
       }
 
-      // Small protection: if portrait gets removed, re-insert after 250ms
+      // Small protection: if portrait gets removed, re-insert after 250ms (uses resources/me.jpg)
       setTimeout(() => {
         const hero = document.getElementById('hero-portrait');
         if (!hero) {
@@ -371,7 +392,7 @@
           if (cont) {
             const img = document.createElement('img');
             img.id = 'hero-portrait';
-            img.src = 'resources/portrait.png';
+            img.src = 'resources/me.jpg';
             img.alt = 'Portrait of Yasin Arafat Nafis';
             img.className = 'portrait-image-hero';
             img.onerror = () => { img.onerror = null; img.src = 'https://via.placeholder.com/320?text=Portrait+Missing'; };
@@ -385,7 +406,7 @@
           if (cont2) {
             const img2 = document.createElement('img');
             img2.id = 'about-portrait';
-            img2.src = 'resources/portrait.png';
+            img2.src = 'resources/me.jpg';
             img2.alt = 'Yasin Arafat Nafis';
             img2.className = 'portrait-image-about';
             img2.onerror = () => { img2.onerror = null; img2.src = 'https://via.placeholder.com/384?text=Portrait+Missing'; };
