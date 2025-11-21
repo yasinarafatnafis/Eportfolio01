@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Yasin Arafat Nafis - Software Developer Portfolio</title>
+
+  <!-- Preload portrait to help avoid flicker -->
+  <link rel="preload" as="image" href="resources/me.jpg">
 
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -12,8 +15,11 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-    * { font-family: 'Inter', sans-serif; }
+    * { font-family: 'Inter', sans-serif; box-sizing: border-box; }
 
+    body { background:#f8fafc; color:#0f172a; margin:0; }
+
+    /* Hero background */
     .hero-bg {
       background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
       position: relative;
@@ -21,88 +27,55 @@
     }
     .hero-bg::before {
       content: '';
-      position: absolute; inset: 0;
+      position: absolute; inset:0;
       background-image: url('./resources/hero-bg.jpg');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.08;
-      z-index: 0;
-      pointer-events: none;
+      background-size: cover; background-position:center;
+      opacity: 0.08; z-index:0; pointer-events:none;
     }
-    .hero-content { position: relative; z-index: 1; }
+    .hero-content { position: relative; z-index:1; }
 
-    /* ---- LARGER PORTRAIT STYLES ----
-       Hero portrait: 320px (desktop), 224px (sm)
-       About-section portrait: 384px (desktop), 256px (md), 192px (sm)
-    */
-    .portrait-container { position: relative; display: inline-block; }
-
+    /* Portrait sizes */
     .portrait-image-hero {
-      width: 320px;
-      height: 320px;
-      object-fit: cover;
-      border-radius: 1rem;
-      border: 6px solid #ffffff;
+      width: 320px; height: 320px; object-fit: cover;
+      border-radius: 1rem; border: 6px solid #fff;
       box-shadow: 0 30px 50px rgba(2,6,23,0.12);
-      transition: transform 0.35s ease;
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      z-index: 50;
+      transition: transform .35s ease;
+      display:block;
     }
-
     .portrait-image-about {
-      width: 384px;
-      height: 384px;
-      object-fit: cover;
-      border-radius: 1.25rem;
-      border: 6px solid #ffffff;
+      width: 384px; height: 384px; object-fit: cover;
+      border-radius: 1.25rem; border: 6px solid #fff;
       box-shadow: 0 30px 50px rgba(2,6,23,0.12);
-      transition: transform 0.35s ease;
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      z-index: 50;
+      transition: transform .35s ease;
+      display:block;
     }
 
-    @media (max-width: 1024px) {
-      .portrait-image-hero { width: 280px; height: 280px; }
-      .portrait-image-about { width: 320px; height: 320px; }
+    @media (max-width:1024px){
+      .portrait-image-hero{width:280px;height:280px}
+      .portrait-image-about{width:320px;height:320px}
     }
-    @media (max-width: 768px) {
-      .portrait-image-hero { width: 224px; height: 224px; }
-      .portrait-image-about { width: 256px; height: 256px; }
+    @media (max-width:768px){
+      .portrait-image-hero{width:224px;height:224px}
+      .portrait-image-about{width:256px;height:256px}
     }
-    @media (prefers-reduced-motion: no-preference) {
-      .portrait-image-hero:hover,
-      .portrait-image-about:hover { transform: translateY(-10px); }
-    }
-
-    .typed-cursor { color: #3b82f6; animation: blink 1s infinite; }
-    @keyframes blink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
-
-    .gradient-text {
-      background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    @media (prefers-reduced-motion:no-preference){
+      .portrait-image-hero:hover,.portrait-image-about:hover{transform:translateY(-10px)}
     }
 
-    .nav-link { position: relative; transition: color 0.3s ease; }
-    .nav-link::after {
-      content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
-      background-color: #3b82f6; transition: width 0.3s ease;
+    .gradient-text{
+      background:linear-gradient(135deg,#1e293b 0%,#475569 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
     }
-    .nav-link:hover::after { width: 100%; }
 
-    .btn-primary {
-      background: linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);
-      transition: all 0.3s ease;
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(59,130,246,0.3); }
+    .nav-link{position:relative;transition:color .25s}
+    .nav-link::after{content:'';position:absolute;left:0;bottom:-4px;height:2px;width:0;background:#3b82f6;transition:width .25s}
+    .nav-link:hover::after{width:100%}
 
-    .btn-secondary {
-      border: 2px solid #3b82f6; color: #3b82f6; transition: all 0.3s ease;
-    }
-    .btn-secondary:hover { background-color: #3b82f6; color: white; transform: translateY(-2px); }
+    .btn-primary{background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff}
+    .btn-primary:hover{transform:translateY(-2px)}
+    .btn-secondary{border:2px solid #3b82f6;color:#3b82f6}
+    .btn-secondary:hover{background:#3b82f6;color:#fff}
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900">
@@ -111,8 +84,7 @@
   <nav class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
-        <div class="flex-shrink-0"><h1 class="text-xl font-bold text-gray-900">Yasin Arafat Nafis</h1></div>
-
+        <div><h1 class="text-xl font-bold text-gray-900">Yasin Arafat Nafis</h1></div>
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-8">
             <a href="index.html" class="nav-link text-gray-900 font-medium">Home</a>
@@ -124,7 +96,6 @@
             <a href="certificates.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Certificates</a>
           </div>
         </div>
-
         <div class="md:hidden">
           <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none">
             <i class="fas fa-bars text-xl"></i>
@@ -132,8 +103,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Mobile -->
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
       <div class="px-2 pt-2 pb-3 space-y-1">
         <a href="index.html" class="block px-3 py-2 text-gray-900 font-medium">Home</a>
@@ -151,58 +120,38 @@
   <section class="hero-bg min-h-screen flex items-center">
     <div class="hero-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <!-- Left Content -->
+        <!-- Left -->
         <div class="space-y-8">
-          <div class="space-y-4">
+          <div>
             <h1 class="text-5xl lg:text-6xl font-bold gradient-text leading-tight">Yasin Arafat Nafis</h1>
             <div class="text-xl lg:text-2xl text-gray-600 font-medium">
-              <span id="typed-text"></span>
-              <span id="typed-fallback" style="display:none;">Entry-level Software Developer</span>
+              <span id="typed-text"></span><span id="typed-fallback" style="display:none">Entry-level Software Developer</span>
             </div>
           </div>
 
           <div class="space-y-4 text-gray-600 leading-relaxed">
-            <p class="text-lg">
-              I am a motivated Computer Science graduate from AIUB, seeking an entry-level IT Software Developer role.
-              Passionate about coding and creating efficient, scalable software solutions while growing technical expertise.
-            </p>
-            <p class="text-lg">
-              Throughout my academic journey, I have honed my critical thinking and problem-solving skills while engaging with Java, C++, Python, C#, and JavaScript.
-            </p>
+            <p class="text-lg">I am a motivated Computer Science graduate from AIUB, seeking an entry-level IT Software Developer role. Passionate about coding and creating efficient, scalable software solutions.</p>
+            <p class="text-lg">I have experience with Java, C++, Python, C#, and JavaScript, and enjoy building clean, maintainable code.</p>
           </div>
 
           <div class="flex flex-col sm:flex-row gap-4 pt-4">
-            <a href="cv.html" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold inline-flex items-center justify-center space-x-2">
-              <i class="fas fa-file-alt"></i><span>View My CV</span>
-            </a>
-            <a href="projects.html" class="btn-secondary px-8 py-3 rounded-lg font-semibold inline-flex items-center justify-center space-x-2">
-              <i class="fas fa-code"></i><span>View My Projects</span>
-            </a>
+            <a href="cv.html" class="btn-primary px-6 py-3 rounded-lg text-white inline-flex items-center space-x-2"><i class="fas fa-file-alt"></i><span>View My CV</span></a>
+            <a href="projects.html" class="btn-secondary px-6 py-3 rounded-lg inline-flex items-center space-x-2"><i class="fas fa-code"></i><span>View Projects</span></a>
           </div>
         </div>
 
-        <!-- Right Content - LARGER Portrait -->
+        <!-- Right - Hero portrait (uses resources/me.jpg) -->
         <div class="flex justify-center lg:justify-end">
-          <div class="portrait-container" style="display:flex; align-items:center;">
+          <div class="portrait-container" style="display:flex;align-items:center">
             <img
               id="hero-portrait"
               src="resources/me.jpg"
               alt="Portrait of Yasin Arafat Nafis"
               class="portrait-image-hero"
+              loading="eager"
               onload="console.log('Hero portrait loaded:', this.src)"
-              onerror="console.warn('Hero portrait missing:', this.src); this.onerror=null; this.src='https://via.placeholder.com/320?text=Portrait+Missing';"
+              onerror="this.onerror=null; console.warn('Hero portrait failed to load:', this.src); this.src='https://via.placeholder.com/320?text=Portrait+Missing';"
             />
-            <!-- optional second hero image (uncomment if you add resources/me2.jpg) -->
-            <!--
-            <img
-              id="hero-portrait-2"
-              src="resources/me2.jpg"
-              alt="Alternate portrait"
-              class="portrait-image-hero-secondary"
-              onload="console.log('Hero second portrait loaded:', this.src)"
-              onerror="console.warn('Hero second portrait missing:', this.src); this.onerror=null; this.src='https://via.placeholder.com/220?text=Portrait+2+Missing';"
-            />
-            -->
           </div>
         </div>
       </div>
@@ -214,156 +163,90 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-gray-900 mb-4">About Me</h2>
-        <div class="w-24 h-1 bg-blue-500 mx-auto"></div>
+        <div class="w-24 h-1 bg-blue-500 mx-auto mb-6"></div>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Passionate software developer with a strong foundation in computer science and a drive for continuous learning.</p>
       </div>
 
       <div class="max-w-4xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           <div class="text-center">
-            <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <i class="fas fa-graduation-cap text-2xl text-blue-600"></i>
-            </div>
+            <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"><i class="fas fa-graduation-cap text-2xl text-blue-600"></i></div>
             <h3 class="text-xl font-semibold mb-2">Education</h3>
-            <p class="text-gray-600">Bachelor of Science in Computer Science & Engineering from AIUB</p>
+            <p class="text-gray-600">B.Sc. in Computer Science & Engineering — AIUB (CGPA: 3.32)</p>
           </div>
 
           <div class="text-center">
-            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <i class="fas fa-code text-2xl text-green-600"></i>
-            </div>
+            <div class="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"><i class="fas fa-code text-2xl text-green-600"></i></div>
             <h3 class="text-xl font-semibold mb-2">Development</h3>
-            <p class="text-gray-600">Proficient in Java, C++, Python, JavaScript, and modern web technologies</p>
+            <p class="text-gray-600">Java, C++, Python, C#, JavaScript</p>
           </div>
 
           <div class="text-center">
-            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-              <i class="fas fa-lightbulb text-2xl text-purple-600"></i>
-            </div>
+            <div class="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4"><i class="fas fa-lightbulb text-2xl text-purple-600"></i></div>
             <h3 class="text-xl font-semibold mb-2">Problem Solving</h3>
-            <p class="text-gray-600">Strong analytical thinking and innovative solution development</p>
+            <p class="text-gray-600">Analytical thinking and creative solutions</p>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
-          <!-- LARGER About portrait -->
+          <!-- About portrait (uses same me.jpg) -->
           <div class="lg:col-span-1 flex justify-center">
-            <div class="relative" style="display:flex; align-items:center; justify-content:center;">
+            <div class="relative" style="display:flex;align-items:center;justify-content:center">
               <img
                 id="about-portrait"
                 src="resources/me.jpg"
                 alt="Yasin Arafat Nafis"
                 class="portrait-image-about"
+                loading="lazy"
                 onload="console.log('About portrait loaded:', this.src)"
-                onerror="console.warn('About portrait missing:', this.src); this.onerror=null; this.src='https://via.placeholder.com/384?text=Portrait+Missing';"
+                onerror="this.onerror=null; console.warn('About portrait failed to load:', this.src); this.src='https://via.placeholder.com/384?text=Portrait+Missing';"
               />
-              <!-- optional second about image (uncomment if you add resources/me2.jpg) -->
-              <!--
-              <img
-                id="about-portrait-2"
-                src="resources/me2.jpg"
-                alt="Alternate about portrait"
-                style="width:220px;height:220px;margin-left:18px;border-radius:1rem;border:6px solid #fff;box-shadow:0 18px 36px rgba(2,6,23,0.10);"
-                onerror="this.onerror=null; this.src='https://via.placeholder.com/220?text=Portrait+2+Missing';"
-              />
-              -->
             </div>
           </div>
 
-          <!-- Content column -->
+          <!-- Content -->
           <div class="lg:col-span-2 space-y-8">
             <div class="bg-gray-50 p-8 rounded-2xl">
               <h2 class="text-2xl font-bold text-gray-900 mb-6">Professional Background</h2>
               <div class="space-y-6 text-gray-700 leading-relaxed">
-                <p class="text-lg">
-                  I am a motivated Computer Science graduate from the American International University–Bangladesh (AIUB),
-                  seeking an entry-level IT Software Developer role where I can apply my technical knowledge and passion for creating efficient, scalable software.
-                </p>
-                <p class="text-lg">
-                  Throughout my academic journey, I have honed critical thinking and problem-solving skills while working with Java, C++, Python, C#, and JavaScript.
-                </p>
+                <p class="text-lg">I am an AIUB Computer Science graduate seeking an entry-level software role. I focus on writing clear, testable code and building projects that solve real problems.</p>
+                <p class="text-lg">I enjoy learning new frameworks and tools, collaborating with teams, and improving user experiences through well-engineered solutions.</p>
               </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="bg-white p-6 rounded-xl border border-gray-200">
-                <div class="flex items-center space-x-3 mb-4">
-                  <div class="bg-blue-100 p-2 rounded-lg"><i class="fas fa-map-marker-alt text-blue-600"></i></div>
-                  <h3 class="text-lg font-semibold text-gray-900">Location</h3>
-                </div>
+                <div class="flex items-center space-x-3 mb-4"><div class="bg-blue-100 p-2 rounded-lg"><i class="fas fa-map-marker-alt text-blue-600"></i></div><h3 class="text-lg font-semibold">Location</h3></div>
                 <p class="text-gray-600">Bashundhara R/A, Dhaka, Bangladesh</p>
               </div>
 
               <div class="bg-white p-6 rounded-xl border border-gray-200">
-                <div class="flex items-center space-x-3 mb-4">
-                  <div class="bg-green-100 p-2 rounded-lg"><i class="fas fa-graduation-cap text-green-600"></i></div>
-                  <h3 class="text-lg font-semibold text-gray-900">Education</h3>
-                </div>
+                <div class="flex items-center space-x-3 mb-4"><div class="bg-green-100 p-2 rounded-lg"><i class="fas fa-graduation-cap text-green-600"></i></div><h3 class="text-lg font-semibold">Education</h3></div>
                 <p class="text-gray-600">Bachelor of Science in Computer Science & Engineering</p>
                 <p class="text-sm text-gray-500">American International University–Bangladesh (AIUB)</p>
               </div>
             </div>
 
             <div class="text-center">
-              <a href="about.html" class="btn-primary text-white px-8 py-3 rounded-lg font-semibold inline-flex items-center space-x-2">
-                <span>Learn More About Me</span><i class="fas fa-arrow-right"></i>
-              </a>
+              <a href="contact.html" class="btn-primary px-8 py-3 rounded-lg inline-flex items-center space-x-2"><span>Get In Touch</span><i class="fas fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills Preview Section -->
-  <section class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">Technical Skills</h2>
-        <div class="w-24 h-1 bg-blue-500 mx-auto"></div>
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        <div class="bg-white p-6 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow">
-          <i class="fab fa-java text-4xl text-red-500 mb-3"></i><h3 class="font-semibold text-gray-900">Java</h3>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow">
-          <i class="fas fa-code text-4xl text-blue-500 mb-3"></i><h3 class="font-semibold text-gray-900">C++</h3>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow">
-          <i class="fab fa-python text-4xl text-yellow-500 mb-3"></i><h3 class="font-semibold text-gray-900">Python</h3>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow">
-          <i class="fab fa-js-square text-4xl text-yellow-400 mb-3"></i><h3 class="font-semibold text-gray-900">JavaScript</h3>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-sm text-center hover:shadow-md transition-shadow">
-          <i class="fas fa-database text-4xl text-blue-600 mb-3"></i><h3 class="font-semibold text-gray-900">MySQL</h3>
-        </div>
-      </div>
-
-      <div class="text-center mt-8">
-        <a href="skills.html" class="btn-secondary px-8 py-3 rounded-lg font-semibold inline-flex items-center space-x-2">
-          <span>View All Skills</span><i class="fas fa-arrow-right"></i>
-        </a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="bg-gray-900 text-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h3 class="text-2xl font-bold mb-4">Yasin Arafat Nafis</h3>
-        <p class="text-gray-400 mb-6">Software Developer Portfolio</p>
-
-        <div class="flex justify-center space-x-6 mb-6">
-          <a href="https://bd.linkedin.com/in/yasin-arafat-nafis" target="_blank" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-2xl"></i></a>
-          <a href="mailto:yasinrafatnafis93@gmail.com" class="text-gray-400 hover:text-white"><i class="fas fa-envelope text-2xl"></i></a>
-          <a href="tel:01992-731719" class="text-gray-400 hover:text-white"><i class="fas fa-phone text-2xl"></i></a>
-        </div>
-
-        <p class="text-gray-500 text-sm">© 2025 Yasin Arafat Nafis. All rights reserved.</p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h3 class="text-2xl font-bold mb-4">Yasin Arafat Nafis</h3>
+      <p class="text-gray-400 mb-6">Software Developer Portfolio</p>
+      <div class="flex justify-center space-x-6 mb-6">
+        <a href="https://bd.linkedin.com/in/yasin-arafat-nafis" target="_blank" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-2xl"></i></a>
+        <a href="mailto:yasinrafatnafis93@gmail.com" class="text-gray-400 hover:text-white"><i class="fas fa-envelope text-2xl"></i></a>
+        <a href="tel:01992-731719" class="text-gray-400 hover:text-white"><i class="fas fa-phone text-2xl"></i></a>
       </div>
+      <p class="text-gray-500 text-sm">© 2025 Yasin Arafat Nafis. All rights reserved.</p>
     </div>
   </footer>
 
@@ -374,47 +257,34 @@
       const menu = document.getElementById('mobile-menu');
       if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
 
-      // Typed.js init
+      // Typed.js (if available)
       if (typeof Typed !== 'undefined') {
         new Typed('#typed-text', {
           strings: ['Entry-level Software Developer', 'B.Sc. in CSE — AIUB (CGPA: 3.32)', 'Java • C++ • Python • C#'],
-          typeSpeed: 45, backSpeed: 30, backDelay: 1800, loop: true, showCursor: true, cursorChar: '|'
+          typeSpeed: 45, backSpeed: 30, backDelay: 1600, loop: true, showCursor: true, cursorChar: '|'
         });
       } else {
         const t = document.getElementById('typed-text'); if (t) t.textContent = 'Entry-level Software Developer';
       }
 
-      // Small protection: if portrait gets removed, re-insert after 250ms (uses resources/me.jpg)
+      // Extra safety: if image not present in DOM after 300ms, try to re-insert with proper path
       setTimeout(() => {
-        const hero = document.getElementById('hero-portrait');
-        if (!hero) {
-          const cont = document.querySelector('.portrait-container');
-          if (cont) {
+        const ensureImg = (id, src, cls, fallback) => {
+          if (!document.getElementById(id)) {
+            const container = document.querySelector('.portrait-container') || document.body;
             const img = document.createElement('img');
-            img.id = 'hero-portrait';
-            img.src = 'resources/me.jpg';
-            img.alt = 'Portrait of Yasin Arafat Nafis';
-            img.className = 'portrait-image-hero';
-            img.onerror = () => { img.onerror = null; img.src = 'https://via.placeholder.com/320?text=Portrait+Missing'; };
-            cont.appendChild(img);
-            console.log('Hero portrait was missing — re-inserted.');
+            img.id = id;
+            img.src = src;
+            img.alt = 'Portrait';
+            img.className = cls;
+            img.onerror = () => { img.onerror = null; img.src = fallback; console.warn(id + ' fallback used'); };
+            container.appendChild(img);
+            console.log(id + ' re-inserted with src=' + src);
           }
-        }
-        const about = document.getElementById('about-portrait');
-        if (!about) {
-          const cont2 = document.querySelector('.max-w-4xl .relative');
-          if (cont2) {
-            const img2 = document.createElement('img');
-            img2.id = 'about-portrait';
-            img2.src = 'resources/me.jpg';
-            img2.alt = 'Yasin Arafat Nafis';
-            img2.className = 'portrait-image-about';
-            img2.onerror = () => { img2.onerror = null; img2.src = 'https://via.placeholder.com/384?text=Portrait+Missing'; };
-            cont2.appendChild(img2);
-            console.log('About portrait was missing — re-inserted.');
-          }
-        }
-      }, 250);
+        };
+        ensureImg('hero-portrait', 'resources/me.jpg', 'portrait-image-hero', 'https://via.placeholder.com/320?text=Portrait+Missing');
+        ensureImg('about-portrait', 'resources/me.jpg', 'portrait-image-about', 'https://via.placeholder.com/384?text=Portrait+Missing');
+      }, 300);
     });
   </script>
 </body>
